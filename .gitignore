@@ -1,0 +1,6 @@
+npm-debug.log
+.DS_Store
+node_modules/
+static/dist/css/
+static/dist/fonts/
+static/dist/js/
