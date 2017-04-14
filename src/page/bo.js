@@ -4,23 +4,21 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, browserHistory } from 'react-router';
 import rootReducer from '../reducers/index';
-import routes from '../route';
+import routes from '../routes/route-default';
 import promise from 'redux-promise';
 // import 'babel-polyfill';
 import thunk from 'redux-thunk';
-import store from '../store';
+import store from '../stores/store-default';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import zh_TW from '../utils/locales/zh_TW';
-import en_US from '../utils/locales/en_US';
+import zh_TW from '../locales/zh_TW';
+import en_US from '../locales/en_US';
 import { IntlProvider } from 'react-intl';
 import intl from 'intl';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // import initTranslation from './components/Common/localize';
 // initTranslation();
-
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Needed for onTouchTap
@@ -30,12 +28,12 @@ injectTapEventPlugin();
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 export const history = syncHistoryWithStore(browserHistory, store);
 
-import ReactGA from 'react-ga';
-ReactGA.initialize('UA-70976323-1');
+// import ReactGA from 'react-ga';
+// ReactGA.initialize('UA-xxx');
 
 function logPageView() {
-  ReactGA.set({ page: window.location.pathname });
-  ReactGA.pageview(window.location.pathname);
+  // ReactGA.set({ page: window.location.pathname });
+  // ReactGA.pageview(window.location.pathname);
 }
 
 function chooseLocale(){
@@ -60,6 +58,7 @@ function chooseLocale(){
     //         break;
     // }
 }
+
 ReactDOM.render(
 <MuiThemeProvider>
   <Provider store={store}>

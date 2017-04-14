@@ -16,14 +16,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean-dist": "rm -rf ./static/dist/* && rm -rf ./static/index*.html && rm -rf ./static/bex*.html && rm -rf ./static/profitobe*.html && rm -rf ./static/joinus*.html && rm -rf ./static/xbpjoinus*.html ",
+    "clean-dist": "rm -rf ./static/dist/* && rm -rf ./static/index*.html && rm -rf ./static/sample*.html ",
     "build-dev": "npm run clean-dist && webpack --PENV=dev --display-error-details --progress --colors -d --profile --config webpack.config.js",
     "build-test": "webpack --PENV=test --display-error-details --progress --colors -p -d --profile --config webpack.config.js",
     "build-prod": "webpack --PENV=prod --display-error-details --progress --colors -p -d --profile --config webpack.config.js",
-    "prod": "webpack-dev-server --PENV=prod",
-    "dev": "webpack-dev-server --PENV=dev",
-    "koa-prod": "nodemon --harmony server.js --PENV=prod ",
-    "koa-dev": "nodemon --harmony server.js --PENV=dev"
+    "dev-server-prod": "webpack-dev-server --PENV=prod",
+    "dev-server-dev": "webpack-dev-server --PENV=dev"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",

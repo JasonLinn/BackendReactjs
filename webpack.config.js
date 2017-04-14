@@ -16,8 +16,7 @@ var definePlugin = new webpack.DefinePlugin({
 // 判断是否是在当前生产环境
 var isProduction = argv.PENV === 'prod';
 var isTest = argv.PENV === 'test';
-var loPath = '/wapp/';
-var loPath2 = '/wappbx/';
+var loPath = '/wlbo/';
 
 module.exports = {
     devServer: {
@@ -39,31 +38,6 @@ module.exports = {
         //     host: "localhost"
         // }]
     },
-    // entry: { //prod 使用：配置入口文件，有几个写几个
-    //     index: './src/page/index.js',
-    //     bex: './src/page/bex.js',
-    //     profitobe: './src/page/profitobe.js',
-    // },
-    // entry: { //test dev使用：配置入口文件，有几个写几个
-    //     index: [
-    //         // 'babel-polyfill',
-    //         'webpack-dev-server/client?http://0.0.0.0:3001',
-    //         'webpack/hot/only-dev-server',
-    //         './src/page/index.js'
-    //     ],
-    //     bex: [
-    //         // 'babel-polyfill',
-    //         'webpack-dev-server/client?http://0.0.0.0:3001',
-    //         'webpack/hot/only-dev-server',
-    //         './src/page/bex.js'
-    //     ],
-    //     profitobe: [
-    //         // 'babel-polyfill',
-    //         'webpack-dev-server/client?http://0.0.0.0:3001',
-    //         'webpack/hot/only-dev-server',
-    //         './src/page/profitobe.js'
-    //     ],
-    // },
     output: {
       // chunkFilename: 'chunk/[name].chunk.js'
       path: path.join(__dirname, './static/dist'), //输出目录的配置，模板、样式、脚本、图片等资源的路径配置都相对于它
@@ -131,16 +105,15 @@ module.exports = {
       // 类库统一打包生成一个文件
       new webpack.optimize.CommonsChunkPlugin({
           name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
-          chunks: ['index','bex','profitobe','joinus','xbpjoinus'], //提取哪些模块共有的部分
+          chunks: ['index','sample'], //提取哪些模块共有的部分
           // filename: isProduction ? 'js/vendor.[hash:10].js':'js/vendor.js',
           minChunks: 3 // 提取至少4个模块共有的部分
       }),
       new webpack.NoErrorsPlugin(), //程式碼沒有錯誤時再更新頁面。
       new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> Track
         path:loPath,
-        indexJs:'index.js',
-        title:'FiToBe',
-        baseUrl:isProduction ? 'http://www.fitobe.com/wapp' : 'http://localhost:3000/wapp',
+        indexJs:'bo.js',
+        title:'首頁',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
         filename: '../index.html', //生成的html存放路径，相对于path
         template: './src/index.template.html', //html模板路径
@@ -154,63 +127,14 @@ module.exports = {
       }),
       new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> FiTobex
         path:loPath,
-        indexJs:'bex.js',
-        title:'ProFiToBex',
-        baseUrl:isProduction ? 'http://www.fitobe.com/wapp' : 'http://localhost:3000/wapp',
+        indexJs:'sample.js',
+        title:'打包範例',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-        filename: '../bex.html', //生成的html存放路径，相对于path
+        filename: '../sample.html', //生成的html存放路径，相对于path
         template: './src/index.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
         // hash: true, //为静态资源生成hash值， 設定成 true 會無法正確 hot loader
         chunks: ['vendors', 'bex'],//需要引入的chunk，不配置就会引入所有页面的资源
-        minify: { //压缩HTML文件
-            removeComments: isProduction ? true : false, //移除HTML中的注释
-            collapseWhitespace: false //删除空白符与换行符
-        }
-      }),
-      new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> FiTobex
-        path:loPath,
-        indexJs:'profitobe.js',
-        title:'ProFiToBe',
-        baseUrl:isProduction ? 'http://www.fitobe.com/wapp' : 'http://localhost:3000/wapp',
-        // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-        filename: '../profitobe.html', //生成的html存放路径，相对于path
-        template: './src/index.template.html', //html模板路径
-        inject: 'body', //js插入的位置，true/'head'/'body'/false
-        // hash: true, //为静态资源生成hash值， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'profitobe'],//需要引入的chunk，不配置就会引入所有页面的资源
-        minify: { //压缩HTML文件
-            removeComments: isProduction ? true : false, //移除HTML中的注释
-            collapseWhitespace: false //删除空白符与换行符
-        }
-      }),
-      new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> Joinus
-        path:loPath,
-        indexJs:'joinus.js',
-        title:'JoinUs',
-        baseUrl:isProduction ? 'http://www.fitobe.com/wapp' : 'http://localhost:3000/wapp',
-        // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-        filename: '../joinus.html', //生成的html存放路径，相对于path
-        template: './src/index.template.html', //html模板路径
-        inject: 'body', //js插入的位置，true/'head'/'body'/false
-        // hash: true, //为静态资源生成hash值， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'joinus'],//需要引入的chunk，不配置就会引入所有页面的资源
-        minify: { //压缩HTML文件
-            removeComments: isProduction ? true : false, //移除HTML中的注释
-            collapseWhitespace: false //删除空白符与换行符
-        }
-      }),
-      new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> xbpJoinus
-        path:loPath,
-        indexJs:'xbpjoinus.js',
-        title:'xbpJoinUs',
-        baseUrl:isProduction ? 'http://www.fitobe.com/wapp' : 'http://localhost:3000/wapp',
-        // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-        filename: '../xbpjoinus.html', //生成的html存放路径，相对于path
-        template: './src/index.template.html', //html模板路径
-        inject: 'body', //js插入的位置，true/'head'/'body'/false
-        // hash: true, //为静态资源生成hash值， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'xbpjoinus'],//需要引入的chunk，不配置就会引入所有页面的资源
         minify: { //压缩HTML文件
             removeComments: isProduction ? true : false, //移除HTML中的注释
             collapseWhitespace: false //删除空白符与换行符
@@ -226,11 +150,8 @@ module.exports = {
 if(isProduction || isTest){
 
   module.exports.entry = { //prod 使用：配置入口文件，有几个写几个
-      index: './src/page/index.js',
-      bex: './src/page/bex.js',
-      profitobe: './src/page/profitobe.js',
-      joinus: './src/page/joinus.js',
-      xbpjoinus: './src/page/xbpjoinus.js',
+      index: './src/page/bo.js',
+      sample: './src/page/bo.js',
   };
 
   module.exports.plugins.push(
@@ -266,31 +187,13 @@ if(isProduction || isTest){
           // 'babel-polyfill',
           'webpack-dev-server/client?http://0.0.0.0:3001',
           'webpack/hot/only-dev-server',
-          './src/page/index.js'
+          './src/page/bo.js'
       ],
-      bex: [
+      sample: [
           // 'babel-polyfill',
           'webpack-dev-server/client?http://0.0.0.0:3001',
           'webpack/hot/only-dev-server',
-          './src/page/bex.js'
-      ],
-      profitobe: [
-          // 'babel-polyfill',
-          'webpack-dev-server/client?http://0.0.0.0:3001',
-          'webpack/hot/only-dev-server',
-          './src/page/profitobe.js'
-      ],
-      joinus: [
-          // 'babel-polyfill',
-          'webpack-dev-server/client?http://0.0.0.0:3001',
-          'webpack/hot/only-dev-server',
-          './src/page/joinus.js'
-      ],
-      xbpjoinus: [
-          // 'babel-polyfill',
-          'webpack-dev-server/client?http://0.0.0.0:3001',
-          'webpack/hot/only-dev-server',
-          './src/page/xbpjoinus.js'
+          './src/page/bo.js'
       ],
   };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute, Redirect, IndexRedirect } from 'react-router';
+import {Route, IndexRoute, Redirect, IndexRedirect} from 'react-router';
 
 import app from './components/app';
 import Login from './components/Login'
@@ -48,14 +48,10 @@ import * as COMMON from './common/common';
 
 export default(
 
-
   <Route path={COMMON.ROOT_PATH+"/"} component={app}>
     <IndexRedirect to={COMMON.ROOT_PATH+"/prepare"} />
     <Redirect from={COMMON.ROOT_PATH+"/index.html"} to={COMMON.ROOT_PATH+"/prepare"} />
     <Route path={COMMON.ROOT_PATH+"/prepare"} component={TrackPrepare}/>
-
-    {/* <IndexRoute component={TrackPrepare} />
-    <Route path={COMMON.ROOT_PATH+"/index.html"} component={TrackPrepare}/> */}
 
     <Route path={COMMON.ROOT_PATH+"/login"} component={Login} fb={FB}/>
     <Route path={COMMON.ROOT_PATH+"/joinus"} component={JoinUs}/>
@@ -98,12 +94,10 @@ export default(
       <IndexRoute component={ProfitobeHome}/>
       <Route path="profile/:profileID" >
         <IndexRoute component={ProfitobeProfile} />
-        {/* <Route path="services" component={ProfitobeService} /> */}
         <Route path="invoice/:invoiceSelected" component={ProfitobeInvoice} />
       </Route>
     </Route>
 
-    <Route path={COMMON.ROOT_PATH+"/mc/:type(/:uid)"} component={MessageCenter} />
 
     <Route path={COMMON.ROOT_PATH+"*"} component={NotFound} />
   </Route>
