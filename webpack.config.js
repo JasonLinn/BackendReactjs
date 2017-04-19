@@ -41,11 +41,14 @@ module.exports = {
         //     target: "http://localhost:3000",
         //     host: "localhost"
         // }]
+		
+		,publicPath: loPath + 'dist/'
+        // match the output `publicPath`
     },
     output: {
       // chunkFilename: 'chunk/[name].chunk.js'
       path: path.join(__dirname, './static/dist'), //输出目录的配置，模板、样式、脚本、图片等资源的路径配置都相对于它
-      // publicPath: loPath + 'dist/', //模板、样式、脚本、图片等资源对应的server上的路径．打開會影響 hotUpdate 的路徑
+      publicPath: loPath + 'dist/', //模板、样式、脚本、图片等资源对应的server上的路径．打開會影響 hotUpdate 的路徑
       filename: isProduction || isTest ?'js/[name].[hash:10].js':'js/[name].js',//每个页面对应的主js的生成配置
       // filename: 'js/[name].js',//每个页面对应的主js的生成配置
       chunkFilename: 'js/[id].chunk.js'   //chunk生成的配置
@@ -133,13 +136,13 @@ module.exports = {
       new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> Track
         path:loPath,
         indexJs:'login.js',
-        title:'首頁',
+        title:'登入',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
         filename: '../login.html', //生成的html存放路径，相对于path
         template: './src/templates/index.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
         // hash: true, //为静态资源生成hash值 ， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'index'],//需要引入的chunk，不配置就会引入所有页面的资源
+        chunks: ['vendors', 'login'],//需要引入的chunk，不配置就会引入所有页面的资源
         minify: { //压缩HTML文件
             removeComments: isProduction ? true : false, //移除HTML中的注释
             collapseWhitespace: false //删除空白符与换行符
@@ -148,13 +151,13 @@ module.exports = {
       new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> FiTobex
         path:loPath,
         indexJs:'sample.js',
-        title:'打包範例',
+        title:'範例',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
         filename: '../sample.html', //生成的html存放路径，相对于path
         template: './src/templates/index.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
         // hash: true, //为静态资源生成hash值， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'bex'],//需要引入的chunk，不配置就会引入所有页面的资源
+        chunks: ['vendors', 'sample'],//需要引入的chunk，不配置就会引入所有页面的资源
         minify: { //压缩HTML文件
             removeComments: isProduction ? true : false, //移除HTML中的注释
             collapseWhitespace: false //删除空白符与换行符
@@ -204,6 +207,7 @@ if(isProduction || isTest){
   // module.exports.devtool = '#source-map';
 
   module.exports.entry = { //test dev使用：配置入口文件，有几个写几个
+      vendor: ['react-hot-loader/patch', 'react', 'react-dom', 'react-router', 'react-tap-event-plugin', 'babel-polyfill'],
       index: [
           // 'babel-polyfill',
           'webpack-dev-server/client?http://0.0.0.0:3001',
