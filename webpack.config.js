@@ -10,13 +10,17 @@ var argv = require('yargs').argv;
 
 var definePlugin = new webpack.DefinePlugin({
   __PRERELEASE__: true,
-  __RELEASE__: argv.PENV === 'prod'
+  __RELEASE__: argv.env === 'prod'
 });
 
 // 判断是否是在当前生产环境
-var isProduction = argv.PENV === 'prod';
-var isTest = argv.PENV === 'test';
-var loPath = '/wlbo/';
+var isProduction = argv.env === 'prod';
+var isTest = argv.env === 'test';
+var loPath = '/';
+
+console.log("cfg1",argv.env);
+console.log("cfg2",isProduction);
+console.log("cfg3",isTest);
 
 module.exports = {
     devServer: {
@@ -27,7 +31,7 @@ module.exports = {
         historyApiFallback: true,
         hot: true,
         inline: true,
-        progress: true,
+        //progress: true,
         contentBase: './static/',
         host: '0.0.0.0',
         port: 3001
@@ -50,9 +54,9 @@ module.exports = {
     },
     watch: true,
     resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ['*', '.js', '.jsx'],
         // modulesDirectories: ["node_modules", "bower_components"],
-        modulesDirectories: ["node_modules"]
+        // modulesDirectories: ["node_modules"]
         // ,
         // alias:{
         //   $:("jquery"),
@@ -66,17 +70,18 @@ module.exports = {
               test: /\.js[x]?$/,
               exclude: node_dir,
               include: path.join(__dirname, 'src'),
-              loaders: [ 'babel?presets[]=es2015,presets[]=es2016,presets[]=es2017,presets[]=stage-3,presets[]=react,plugins[]=transform-runtime,plugins[]=transform-decorators-legacy,plugins[]=transform-class-properties'],
+              loaders: [ 'babel-loader?presets[]=es2015,presets[]=es2016,presets[]=es2017,presets[]=stage-3,presets[]=react,plugins[]=transform-runtime,plugins[]=transform-decorators-legacy,plugins[]=transform-class-properties'],
               // loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=stage-0,presets[]=react,plugins[]=transform-runtime']
               //
               // query: {
               //     presets: ['es2015', 'react']
               // }
           },
-          {
-              test: /\.css$/,
-              loader: ExtractTextPlugin.extract('style', 'css')
-          },
+
+          // {
+          //     test: /\.css$/,
+          //     loader: ExtractTextPlugin.extract('style', 'css')
+          // },
           // {
           //     test: /\.(svg|png|jpg|jpeg|gif)$/,
           //     loader: 'url-loader?limit=10192'
@@ -105,7 +110,7 @@ module.exports = {
       // 类库统一打包生成一个文件
       new webpack.optimize.CommonsChunkPlugin({
           name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
-          chunks: ['index','sample'], //提取哪些模块共有的部分
+          chunks: ['index','sample','login'], //提取哪些模块共有的部分
           // filename: isProduction ? 'js/vendor.[hash:10].js':'js/vendor.js',
           minChunks: 3 // 提取至少4个模块共有的部分
       }),
@@ -116,7 +121,22 @@ module.exports = {
         title:'首頁',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
         filename: '../index.html', //生成的html存放路径，相对于path
-        template: './src/index.template.html', //html模板路径
+        template: './src/templates/index.template.html', //html模板路径
+        inject: 'body', //js插入的位置，true/'head'/'body'/false
+        // hash: true, //为静态资源生成hash值 ， 設定成 true 會無法正確 hot loader
+        chunks: ['vendors', 'index'],//需要引入的chunk，不配置就会引入所有页面的资源
+        minify: { //压缩HTML文件
+            removeComments: isProduction ? true : false, //移除HTML中的注释
+            collapseWhitespace: false //删除空白符与换行符
+        }
+      }),
+      new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> Track
+        path:loPath,
+        indexJs:'login.js',
+        title:'首頁',
+        // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
+        filename: '../login.html', //生成的html存放路径，相对于path
+        template: './src/templates/index.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
         // hash: true, //为静态资源生成hash值 ， 設定成 true 會無法正確 hot loader
         chunks: ['vendors', 'index'],//需要引入的chunk，不配置就会引入所有页面的资源
@@ -131,7 +151,7 @@ module.exports = {
         title:'打包範例',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
         filename: '../sample.html', //生成的html存放路径，相对于path
-        template: './src/index.template.html', //html模板路径
+        template: './src/templates/index.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
         // hash: true, //为静态资源生成hash值， 設定成 true 會無法正確 hot loader
         chunks: ['vendors', 'bex'],//需要引入的chunk，不配置就会引入所有页面的资源
@@ -151,6 +171,7 @@ if(isProduction || isTest){
 
   module.exports.entry = { //prod 使用：配置入口文件，有几个写几个
       index: './src/page/bo.js',
+      login: './src/page/login.js',
       sample: './src/page/bo.js',
   };
 
@@ -189,6 +210,12 @@ if(isProduction || isTest){
           'webpack/hot/only-dev-server',
           './src/page/bo.js'
       ],
+      login: [
+          // 'babel-polyfill',
+          'webpack-dev-server/client?http://0.0.0.0:3001',
+          'webpack/hot/only-dev-server',
+          './src/page/login.js'
+      ],
       sample: [
           // 'babel-polyfill',
           'webpack-dev-server/client?http://0.0.0.0:3001',
@@ -200,6 +227,12 @@ if(isProduction || isTest){
   //test dev使用：使用webpack-dev-server的Hot Module Replacement Plugin套件
   module.exports.plugins.push(
     new webpack.HotModuleReplacementPlugin()
+  );
+
+  module.exports.plugins.push(
+    new OpenBrowserPlugin({
+        url: 'http://localhost:3001/'
+    })
   );
 
 }

@@ -11,7 +11,7 @@ function mapStateToProps(state){
     }
 };
 
-class SampleIndex extends Component {
+class BOLoginIndex extends Component {
 
   componentWillMount(e){
     // //檢驗登入權限
@@ -35,7 +35,7 @@ class SampleIndex extends Component {
           <div id="page-content">
 
             <div id="page-title" style={{marginBottom:"10px"}}>
-                <h2>範例2</h2>
+                <h2>範例Login</h2>
             </div>
             {this.props.children}
 
@@ -46,4 +46,4 @@ class SampleIndex extends Component {
   }
 }
 
-export default connect(mapStateToProps)(SampleIndex);
+export default connect(mapStateToProps)(BOLoginIndex);

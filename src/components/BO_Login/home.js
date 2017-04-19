@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import HomeContent from './home_content';
 
-export default class SampleHome extends Component {
+export default class BOLoginHome extends Component {
   constructor(props){
     super(props);
     $(window).scrollTop(0);

@@ -17,11 +17,12 @@
   "main": "index.js",
   "scripts": {
     "clean-dist": "rm -rf ./static/dist/* && rm -rf ./static/index*.html && rm -rf ./static/sample*.html ",
-    "build-dev": "npm run clean-dist && webpack --PENV=dev --display-error-details --progress --colors -d --profile --config webpack.config.js",
-    "build-test": "webpack --PENV=test --display-error-details --progress --colors -p -d --profile --config webpack.config.js",
-    "build-prod": "webpack --PENV=prod --display-error-details --progress --colors -p -d --profile --config webpack.config.js",
-    "dev-server-prod": "webpack-dev-server --PENV=prod",
-    "dev-server-dev": "webpack-dev-server --PENV=dev"
+    "build-dev-": "npm run clean-dist && webpack --env=dev --display-error-details --progress --colors -d --profile --config webpack.config.js",
+    "build-dev": "webpack --env=dev --display-error-details --progress --colors -d --profile --config webpack.config.js",
+    "build-test": "webpack --env=test --display-error-details --progress --colors -p -d --profile --config webpack.config.js",
+    "build-prod": "webpack --env=prod --display-error-details --progress --colors -p -d --profile --config webpack.config.js",
+    "dev-server-prod": "webpack-dev-server --env=prod",
+    "dev-server-dev": "webpack-dev-server --env=dev"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -44,7 +45,7 @@
     "ip": "^1.1.5",
     "open-browser": "^3.5.2",
     "open-browser-webpack-plugin": "0.0.5",
-    "react-hot-loader": "^1.3.1",
+    "react-hot-loader": "^3.0.0-beta.6",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1",

@@ -2,9 +2,9 @@
 // -----------------------------------
 import { browserHistory } from 'react-router';
 
-var FTH_URL1 = "https://dev.fitobe.com/fitobe/api";
+var FTH_URL1 = "http://localhost:8888/api";
 if (__RELEASE__) {
-  FTH_URL1 = "https://api.fitobe.com/fitobe/api";
+  FTH_URL1 = "http://api.noc.com/bo/api";
 }
 export var FTH_URL = FTH_URL1;
 
@@ -12,7 +12,7 @@ export var FTH_URL = FTH_URL1;
 export function FETCH_HEADERS(t) {
     return{
       'Accept':'application/json',
-      'Application_Key':'13524932',
+      'Application_Key':'93544952',
       'Authorization': t,
       'lang':'zh',
       'timezone':'Asia/Taipei',
@@ -27,7 +27,7 @@ export function FETCH_HEADERS(t) {
 export function FETCH_GET_HEADERS(t) {
     return{
       'Accept':'application/json',
-      'Application_Key':'13524932',
+      'Application_Key':'93544952',
       'Authorization': t,
       'lang':'zh',
       'timezone':'Asia/Taipei',

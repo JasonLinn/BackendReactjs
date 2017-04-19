@@ -10,13 +10,13 @@ function mapStateToProps(state){
     }
 };
 
-class TrackPrepare extends Component {
+class BOLoginPrepare extends Component {
 
   componentDidMount() {
-    let x = Decrypt.decryptData();
+    let x = Decrypt.decryptUserData();
     if(x == null){
       !__RELEASE__ && console.log("tp",0);
-      browserHistory.push(COMMON.ROOT_PATH+"/track/sample");
+      browserHistory.push(COMMON.ROOT_PATH+"/login");
       return;
     }
     var self = this;
@@ -24,7 +24,8 @@ class TrackPrepare extends Component {
     COMMON.wait(1000)
     .then(function(){
       !__RELEASE__ && console.log("tp",2);
-      browserHistory.push(COMMON.ROOT_PATH+"/track/sample")});
+      window.location = COMMON.ROOT_PATH+'/index.html';
+    });
   }
 
 	render() {
@@ -35,4 +36,4 @@ class TrackPrepare extends Component {
   }
 }
 
-export default connect(mapStateToProps)(TrackPrepare);
+export default connect(mapStateToProps)(BOLoginPrepare);

@@ -35,17 +35,12 @@ class appWLBo extends Component {
   //   super(props);
   componentWillMount(e){
     var x = Decrypt.decryptData();
-    var proRegex = /profitobe/;
     const location = this.props.location.pathname.trim().toLowerCase();
     var msRegex1 = /login/;
-    var msRegex2 = /joinus/;
-    var msRegex3 = /forget/;
-    var msRegex5 = /prepare/;
+    var msRegex2 = /prepare/;
     !__RELEASE__ && console.log("app",location);
 
-    if(!msRegex1.test(location) && !msRegex2.test(location) && !msRegex3.test(location) && !msRegex5.test(location)
-       && !proRegex.test(location)
-    ){
+    if(!msRegex1.test(location) && !msRegex2.test(location)){
       !__RELEASE__ && console.log("app",1);
       if (!routesAreAuthorized(x, routes.props)){
         !__RELEASE__ && console.log("app",2);
@@ -58,7 +53,8 @@ class appWLBo extends Component {
         !__RELEASE__ && console.log("app",4);
       } else {
         !__RELEASE__ && console.log("app",5);
-        browserHistory.push(COMMON.ROOT_PATH+"/dashboard");
+        //browserHistory.push(COMMON.ROOT_PATH+"/dashboard");
+        window.location = COMMON.ROOT_PATH+'/index.html';
         return;
       }
     }

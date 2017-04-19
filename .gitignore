@@ -306,3 +306,6 @@ static/dist/js/
 .DS_Store
 
 # java spring
+static/login.html
+static/sample.html
+static/index.html
