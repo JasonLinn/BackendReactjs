@@ -28,7 +28,9 @@ module.exports = {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         },
-        historyApiFallback: true,
+        historyApiFallback: {
+            index:'indexbo.html'
+        },
         hot: true,
         inline: true,
         //progress: true,
@@ -41,7 +43,7 @@ module.exports = {
         //     target: "http://localhost:3000",
         //     host: "localhost"
         // }]
-		
+
 		,publicPath: loPath + 'dist/'
         // match the output `publicPath`
     },
@@ -81,10 +83,11 @@ module.exports = {
               // }
           },
 
-          // {
-          //     test: /\.css$/,
-          //     loader: ExtractTextPlugin.extract('style', 'css')
-          // },
+          {
+              test: /\.css$/,
+              // loader: ExtractTextPlugin.extract('style', 'css')
+              loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+          },
           // {
           //     test: /\.(svg|png|jpg|jpeg|gif)$/,
           //     loader: 'url-loader?limit=10192'
@@ -113,21 +116,21 @@ module.exports = {
       // 类库统一打包生成一个文件
       new webpack.optimize.CommonsChunkPlugin({
           name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
-          chunks: ['index','sample','login'], //提取哪些模块共有的部分
+          chunks: ['indexbo','sample','loginbo'], //提取哪些模块共有的部分
           // filename: isProduction ? 'js/vendor.[hash:10].js':'js/vendor.js',
           minChunks: 3 // 提取至少4个模块共有的部分
       }),
       new webpack.NoErrorsPlugin(), //程式碼沒有錯誤時再更新頁面。
       new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> Track
         path:loPath,
-        indexJs:'bo.js',
+        indexJs:'indexbo.js',
         title:'首頁',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-        filename: '../index.html', //生成的html存放路径，相对于path
+        filename: '../indexbo.html', //生成的html存放路径，相对于path
         template: './src/templates/index.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
         // hash: true, //为静态资源生成hash值 ， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'index'],//需要引入的chunk，不配置就会引入所有页面的资源
+        chunks: ['vendors', 'indexbo'],//需要引入的chunk，不配置就会引入所有页面的资源
         minify: { //压缩HTML文件
             removeComments: isProduction ? true : false, //移除HTML中的注释
             collapseWhitespace: false //删除空白符与换行符
@@ -135,14 +138,14 @@ module.exports = {
       }),
       new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> Track
         path:loPath,
-        indexJs:'login.js',
+        indexJs:'loginbo.js',
         title:'登入',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-        filename: '../login.html', //生成的html存放路径，相对于path
+        filename: '../loginbo.html', //生成的html存放路径，相对于path
         template: './src/templates/index.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
         // hash: true, //为静态资源生成hash值 ， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'login'],//需要引入的chunk，不配置就会引入所有页面的资源
+        chunks: ['vendors', 'loginbo'],//需要引入的chunk，不配置就会引入所有页面的资源
         minify: { //压缩HTML文件
             removeComments: isProduction ? true : false, //移除HTML中的注释
             collapseWhitespace: false //删除空白符与换行符
@@ -173,9 +176,9 @@ module.exports = {
 if(isProduction || isTest){
 
   module.exports.entry = { //prod 使用：配置入口文件，有几个写几个
-      index: './src/page/bo.js',
-      login: './src/page/login.js',
-      sample: './src/page/bo.js',
+      indexbo: './src/page/index-bo.js',
+      loginbo: './src/page/login-bo.js',
+      sample: './src/page/index-bo.js',
   };
 
   module.exports.plugins.push(
@@ -204,27 +207,27 @@ if(isProduction || isTest){
 }else{// 開發才跑
   // devtool: '#cheap-module-eval-source-map',//#inline-source-map, //#cheap-module-eval-source-map //#source-map
   // module.exports.devtool = '#cheap-module-eval-source-map';
-  // module.exports.devtool = '#source-map';
+  module.exports.devtool = '#source-map';
 
   module.exports.entry = { //test dev使用：配置入口文件，有几个写几个
       vendor: ['react-hot-loader/patch', 'react', 'react-dom', 'react-router', 'react-tap-event-plugin', 'babel-polyfill'],
-      index: [
+      indexbo: [
           // 'babel-polyfill',
           'webpack-dev-server/client?http://0.0.0.0:3001',
           'webpack/hot/only-dev-server',
-          './src/page/bo.js'
+          './src/page/index-bo.js'
       ],
-      login: [
+      loginbo: [
           // 'babel-polyfill',
           'webpack-dev-server/client?http://0.0.0.0:3001',
           'webpack/hot/only-dev-server',
-          './src/page/login.js'
+          './src/page/login-bo.js'
       ],
       sample: [
           // 'babel-polyfill',
           'webpack-dev-server/client?http://0.0.0.0:3001',
           'webpack/hot/only-dev-server',
-          './src/page/bo.js'
+          './src/page/index-bo.js'
       ],
   };
 
@@ -233,10 +236,10 @@ if(isProduction || isTest){
     new webpack.HotModuleReplacementPlugin()
   );
 
-  module.exports.plugins.push(
-    new OpenBrowserPlugin({
-        url: 'http://localhost:3001/'
-    })
-  );
+  // module.exports.plugins.push(
+  //   new OpenBrowserPlugin({
+  //       url: 'http://localhost:3001/index.html'
+  //   })
+  // );
 
 }

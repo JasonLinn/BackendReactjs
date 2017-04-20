@@ -10,14 +10,14 @@ function mapStateToProps(state){
     }
 };
 
-class BOLoginPrepare extends Component {
+class BOIndexPrepare extends Component {
 
   componentDidMount() {
-    console.log("tppp",0);
+    console.log("tpppp",0);
     let x = Decrypt.decryptBOUserData();
     if(x == null){
       !__RELEASE__ && console.log("tp",0);
-      browserHistory.push(COMMON.ROOT_PATH+"/login");
+      window.location = COMMON.ROOT_PATH+'/loginbo.html';
       return;
     }
     var self = this;
@@ -25,8 +25,7 @@ class BOLoginPrepare extends Component {
     COMMON.wait(1000)
     .then(function(){
       !__RELEASE__ && console.log("tp",2);
-      window.location = COMMON.ROOT_PATH+'/indexbo.html';
-    });
+      browserHistory.push(COMMON.ROOT_PATH+"/st")});
   }
 
 	render() {
@@ -37,4 +36,4 @@ class BOLoginPrepare extends Component {
   }
 }
 
-export default connect(mapStateToProps)(BOLoginPrepare);
+export default connect(mapStateToProps)(BOIndexPrepare);

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import DatePicker from 'react-bootstrap-date-picker';
+// import DatePicker from 'react-bootstrap-date-picker';
 import Decrypt from '../../services/decrypt';
 import CryptoJS from 'crypto-js';
 import {testGet} from '../../actions/AuthAction';
@@ -30,7 +30,7 @@ class HomeContent extends Component {
   componentDidMount(node){
 
     //為了確保有當天的體重紀錄
-    let x = Decrypt.decryptUserData();
+    let x = Decrypt.decryptBOUserData();
     const time = + new Date(this.props.state.dateStore);
     const timestamp = parseInt((time/1000).toFixed());
 
@@ -40,7 +40,7 @@ class HomeContent extends Component {
 
   // 日期變化時啟動
   handleCalendarChange(value) {
-    let x = Decrypt.decryptUserData();
+    let x = Decrypt.decryptBOUserData();
   }
 
   // note變化時啟動
@@ -49,7 +49,7 @@ class HomeContent extends Component {
 
   // note 存檔動作
   handleNoteSave(){
-    let x = Decrypt.decryptUserData();
+    let x = Decrypt.decryptBOUserData();
   }
 
   render() {
@@ -61,8 +61,7 @@ class HomeContent extends Component {
             <span className="add-on input-group-addon">
                 <i className="glyph-icon icon-calendar"></i>
             </span>
-              <DatePicker onChange={this.handleCalendarChange.bind(this)} placeholder="請選日期" value={this.props.state.dateStore}
-                dateFormat="YYYY/MM/DD" id="change_handler_calendar"/>
+              
             </div>
 
               <div className="form-group">

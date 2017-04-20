@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, browserHistory } from 'react-router';
 import rootReducer from '../reducers/index';
-import routes from '../routes/route-login';
+import routes from '../routes/route-bo-index';
 import promise from 'redux-promise';
 // import 'babel-polyfill';
 import thunk from 'redux-thunk';
@@ -17,6 +17,7 @@ import { IntlProvider } from 'react-intl';
 import intl from 'intl';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import 'bootstrap/dist/css/bootstrap.css';
 // import initTranslation from './components/Common/localize';
 // initTranslation();
 import injectTapEventPlugin from 'react-tap-event-plugin';

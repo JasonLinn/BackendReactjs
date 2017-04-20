@@ -13,7 +13,7 @@ function mapStateToProps(state){
 class TrackPrepare extends Component {
 
   componentDidMount() {
-    let x = Decrypt.decryptData();
+    let x = Decrypt.decryptBOUserData();
     if(x == null){
       !__RELEASE__ && console.log("tp",0);
       browserHistory.push(COMMON.ROOT_PATH+"/track/sample");

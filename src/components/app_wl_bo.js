@@ -34,7 +34,7 @@ class appWLBo extends Component {
   // constructor(props){ // ES6 取代 componentWillMount（ES5用法)
   //   super(props);
   componentWillMount(e){
-    var x = Decrypt.decryptData();
+    var x = Decrypt.decryptBOUserData();
     const location = this.props.location.pathname.trim().toLowerCase();
     var msRegex1 = /login/;
     var msRegex2 = /prepare/;
@@ -54,7 +54,7 @@ class appWLBo extends Component {
       } else {
         !__RELEASE__ && console.log("app",5);
         //browserHistory.push(COMMON.ROOT_PATH+"/dashboard");
-        window.location = COMMON.ROOT_PATH+'/index.html';
+        window.location = COMMON.ROOT_PATH+'/indexbo.html';
         return;
       }
     }

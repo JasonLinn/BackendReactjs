@@ -4,6 +4,7 @@ import Decrypt from '../../services/decrypt';
 import {connect} from 'react-redux';
 import * as COMMON from '../../common/common';
 import { browserHistory } from 'react-router';
+import { Button } from 'reactstrap';
 
 function mapStateToProps(state){
     return{
@@ -15,7 +16,7 @@ class SampleIndex extends Component {
 
   componentWillMount(e){
     // //檢驗登入權限
-    // var x = Decrypt.decryptUserData();
+    // var x = Decrypt.decryptBOUserData();
     // if (x !=null){
     //   this.props.checkUserAuth(x.token, x.uuid, this.props.location.pathname);
     // } else{
@@ -38,6 +39,8 @@ class SampleIndex extends Component {
                 <h2>範例2</h2>
             </div>
             {this.props.children}
+
+            <Button color="primary">primary</Button>{' '}
 
           </div>
         </div>

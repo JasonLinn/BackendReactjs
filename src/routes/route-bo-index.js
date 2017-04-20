@@ -4,7 +4,7 @@ import {Route, IndexRoute, Redirect, IndexRedirect} from 'react-router';
 import appWLBo from '../components/app_wl_bo';
 import NotFound from '../components/NotFound'
 
-import TrackPrepare from '../components/TrackPrepare';
+import BOIndexPrepare from '../components/BOIndexPrepare';
 
 import SampleIndex from '../components/sample/index'
 import SampleHome from '../components/sample/home';
@@ -16,7 +16,7 @@ export default(
   <Route path={COMMON.ROOT_PATH+"/"} component={appWLBo}>
     <IndexRedirect to={COMMON.ROOT_PATH+"/prepare"} />
     <Redirect from={COMMON.ROOT_PATH+"/indexbo.html"} to={COMMON.ROOT_PATH+"/prepare"} />
-    <Route path={COMMON.ROOT_PATH+"/prepare"} component={TrackPrepare}/>
+    <Route path={COMMON.ROOT_PATH+"/prepare"} component={BOIndexPrepare}/>
 
     <Route path={COMMON.ROOT_PATH+"/st"} component={SampleIndex} >
       <IndexRoute component={SampleHome} />

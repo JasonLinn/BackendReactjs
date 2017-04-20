@@ -15,7 +15,7 @@ export default(
 
   <Route path={COMMON.ROOT_PATH+"/"} component={appWLBo}>
     <IndexRedirect to={COMMON.ROOT_PATH+"/prepare"} />
-    <Redirect from={COMMON.ROOT_PATH+"/login.html"} to={COMMON.ROOT_PATH+"/prepare"} />
+    <Redirect from={COMMON.ROOT_PATH+"/loginbo.html"} to={COMMON.ROOT_PATH+"/prepare"} />
     <Route path={COMMON.ROOT_PATH+"/prepare"} component={BOLoginPrepare}/>
 
     <Route path={COMMON.ROOT_PATH+"/login"} component={BOLoginIndex}>

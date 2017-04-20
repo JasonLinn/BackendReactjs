@@ -52,6 +52,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
     "crypto-js": "^3.1.9-1",
     "es6-promise": "^4.1.0",
     "hoist-non-react-statics": "^1.2.0",
@@ -63,21 +64,21 @@
     "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2",
     "react-ajax": "^0.1.1",
     "react-alert": "^1.0.14",
-    "react-bootstrap": "^0.30.8",
-    "react-bootstrap-date-picker": "^5.0.1",
     "react-datepicker": "^0.44.0",
     "react-dom": "^15.5.4",
     "react-image-lightbox": "^3.4.2",
     "react-intl": "^2.2.3",
-    "react-redux": "^5.0.4",
-    "react-router": "^4.1.1",
-    "react-router-redux": "^5.0.0-alpha.6",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "react-router-redux": "^4.0.7",
     "react-semantify": "^0.6.0",
     "react-simple-charts": "0.0.19",
     "react-tap-event-plugin": "^2.0.1",
     "react-waypoint": "^6.0.0",
+    "reactstrap": "^4.5.0",
     "redux": "^3.6.0",
     "redux-form": "^6.6.3",
     "redux-promise": "^0.5.3",
@@ -89,6 +90,5 @@
     "sha256": "^0.2.0",
     "sweetalert-react": "^0.4.9",
     "yargs": "^7.1.0"
-	
   }
 }
