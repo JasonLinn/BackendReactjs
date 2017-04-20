@@ -8,6 +8,13 @@ if (__RELEASE__) {
 }
 export var FTH_URL = FTH_URL1;
 
+//ROOT_PATH1 都會是 /bo
+var ROOT_PATH1 = "";
+if (__RELEASE__) {
+  ROOT_PATH1 = "";
+}
+export var ROOT_PATH = ROOT_PATH1;
+
 // -----------------------------------
 export function FETCH_HEADERS(t) {
     return{

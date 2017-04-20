@@ -1,0 +1,22 @@
+1 安裝 node.js
+2 下載 atom
+安裝外掛
+nuclide
+nuclide-format-js
+atom-beautify haskell-grammar
+highlight-selected
+atom-react-native-autocomplete js-hyperclick
+language-babel cht-menu seti-ui
+react language-javascript-jsx
+
+3 複製抄本
+  git clone
+
+4 進入資料夾後執行
+  npm install
+  npm run build-dev
+
+5 啟動開發用服務器
+  npm run dev-server-dev
+
+6 打開 瀏覽器 http://localhost:3001

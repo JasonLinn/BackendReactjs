@@ -34,30 +34,30 @@ class appWLBo extends Component {
   // constructor(props){ // ES6 取代 componentWillMount（ES5用法)
   //   super(props);
   componentWillMount(e){
-    var x = Decrypt.decryptBOUserData();
-    const location = this.props.location.pathname.trim().toLowerCase();
-    var msRegex1 = /login/;
-    var msRegex2 = /prepare/;
-    !__RELEASE__ && console.log("app",location);
-
-    if(!msRegex1.test(location) && !msRegex2.test(location)){
-      !__RELEASE__ && console.log("app",1);
-      if (!routesAreAuthorized(x, routes.props)){
-        !__RELEASE__ && console.log("app",2);
-        browserHistory.push(COMMON.ROOT_PATH+"/login");
-        return;
-      }
-    } else if (routesAreAuthorized(x,routes.props)){
-      !__RELEASE__ && console.log("app",3);
-      if(proRegex.test(location)){
-        !__RELEASE__ && console.log("app",4);
-      } else {
-        !__RELEASE__ && console.log("app",5);
-        //browserHistory.push(COMMON.ROOT_PATH+"/dashboard");
-        window.location = COMMON.ROOT_PATH+'/indexbo.html';
-        return;
-      }
-    }
+    // var x = Decrypt.decryptBOUserData();
+    // const location = this.props.location.pathname.trim().toLowerCase();
+    // var msRegex1 = /login/;
+    // var msRegex2 = /prepare/;
+    // !__RELEASE__ && console.log("app",location);
+    //
+    // if(!msRegex1.test(location) && !msRegex2.test(location)){
+    //   !__RELEASE__ && console.log("app",1);
+    //   if (!routesAreAuthorized(x, routes.props)){
+    //     !__RELEASE__ && console.log("app",2);
+    //     browserHistory.push(COMMON.ROOT_PATH+"/login");
+    //     return;
+    //   }
+    // } else if (routesAreAuthorized(x,routes.props)){
+    //   !__RELEASE__ && console.log("app",3);
+    //   if(proRegex.test(location)){
+    //     !__RELEASE__ && console.log("app",4);
+    //   } else {
+    //     !__RELEASE__ && console.log("app",5);
+    //     //browserHistory.push(COMMON.ROOT_PATH+"/dashboard");
+    //     window.location = COMMON.ROOT_PATH+'/indexbo.html';
+    //     return;
+    //   }
+    // }
   }
 
 	render() {

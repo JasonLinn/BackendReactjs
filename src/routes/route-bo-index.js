@@ -11,6 +11,8 @@ import SampleHome from '../components/sample/home';
 
 import * as COMMON from '../common/common';
 
+console.log("r1",COMMON.ROOT_PATH);
+
 export default(
 
   <Route path={COMMON.ROOT_PATH+"/"} component={appWLBo}>
