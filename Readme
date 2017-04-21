@@ -1,4 +1,11 @@
 1 安裝 node.js
+npm install --save react@15.0.0
+npm uninstall --save react
+npm install --save-dev react
+npm uninstall --save-dev react
+npm run script
+npm search 關鍵字
+
 2 下載 atom
 安裝外掛
 nuclide
@@ -20,3 +27,23 @@ react language-javascript-jsx
   npm run dev-server-dev
 
 6 打開 瀏覽器 http://localhost:3001
+  打開 console 訊息窗提示 可以安裝 react dev tool
+
+7 說明
+  畫面入口
+  route : 小寫 減號連接
+  action : 大寫開頭 後綴 Action
+  service : 大寫開頭 後綴 Service
+  store : 小寫 減號連接
+  reducers : 小寫 減號連接
+  static : 靜態資源放區
+  webpack
+    打包行為
+  components 用特徵 或功能分組
+    包網後台 : BO _ XX功能
+    CMS : CMS _ XX功能
+    CMS廳 : CMSA _ XX功能
+    attachment : 頭區 尾區 選單等組件
+
+8 API
+  後續會看類似 http://localhost:8888/swagger/ui/
