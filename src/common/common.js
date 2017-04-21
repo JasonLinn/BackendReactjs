@@ -8,6 +8,12 @@ if (__RELEASE__) {
 }
 export var FTH_URL = FTH_URL1;
 
+var FTH_URL2 = "http://localhost:8888/api";
+if (__RELEASE__) {
+  FTH_URL2 = "http://api.noc.com/bo/api";
+}
+export var FTH_BO_URL = FTH_URL2;
+
 //ROOT_PATH1 都會是 /bo
 var ROOT_PATH1 = "";
 if (__RELEASE__) {
@@ -27,7 +33,7 @@ export function FETCH_HEADERS(t) {
       'device_model':'web',
       'OS_version':'web',
       'api_version':'1.0.0',
-      'Content-Type':'application/x-www-form-urlencoded'
+      'Content-Type':'application/json'
   };
 }
 

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-// import DatePicker from 'react-bootstrap-date-picker';
 import Decrypt from '../../services/decrypt';
 import CryptoJS from 'crypto-js';
-import {testGet} from '../../actions/AuthAction';
+import {loginUser} from '../../actions/AuthAction';
 import {connect} from 'react-redux';
+import { Button } from 'reactstrap';
 
 function mapStateToProps(state){
     return{
       state:state,
+      isLogin:state.loginStore.isLogin,
     }
 };
 
@@ -28,14 +29,7 @@ class HomeContent extends Component {
 
   // 掛載完成時選出當天的 資料
   componentDidMount(node){
-
-    //為了確保有當天的體重紀錄
     let x = Decrypt.decryptBOUserData();
-    const time = + new Date(this.props.state.dateStore);
-    const timestamp = parseInt((time/1000).toFixed());
-
-    var dateStr = this.props.dateStr || "";
-    var nDate = dateStr == "" ? new Date().toISOString():CryptoJS.AES.decrypt(dateStr, 'dts').toString(CryptoJS.enc.Utf8);
   }
 
   // 日期變化時啟動
@@ -44,46 +38,20 @@ class HomeContent extends Component {
   }
 
   // note變化時啟動
-  handleTextareaChange(e){
-  }
+  handleLogin(e){
 
-  // note 存檔動作
-  handleNoteSave(){
-    let x = Decrypt.decryptBOUserData();
+    this.props.loginUser(11,'hunk.kuo','zxc123');
+
   }
 
   render() {
     return (
-      <div className="tab-content">
-          <div className="tab-pane fade active in" id="track-tab-2">
-            <br/>
-            <div className="input-prepend input-group" style={{fontWeight:"bold"}}>
-            <span className="add-on input-group-addon">
-                <i className="glyph-icon icon-calendar"></i>
-            </span>
-              
-            </div>
-
-              <div className="form-group">
-
-                <div className="col-sm-10">
-                  <textarea name="notetet" rows={3} value=""
-                    onChange={this.handleTextareaChange.bind(this)}
-                    className="form-control textarea-counter textarea-autosize"/>
-                  <div className="character-remaining clear input-description">
-
-                  </div>
-                </div>
-
-                <div className="col-sm-2">
-                </div>
-
-              </div>
-          </div>
+      <div>
+        <Button color="primary" onClick={this.handleLogin.bind(this)}>登入</Button>{' '}
       </div>
     );
   }
 
 }
 
-export default connect(mapStateToProps,{testGet})(HomeContent);
+export default connect(mapStateToProps,{loginUser})(HomeContent);

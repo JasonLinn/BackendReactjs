@@ -4,7 +4,6 @@ import Decrypt from '../../services/decrypt';
 import {connect} from 'react-redux';
 import * as COMMON from '../../common/common';
 import { browserHistory } from 'react-router';
-import { Button } from 'reactstrap';
 
 function mapStateToProps(state){
     return{
@@ -27,21 +26,13 @@ class BOLoginIndex extends Component {
   render() {
     return (
       <div id="page-wrapper">
-
-        <div id="mobile-navigation">
-          <button id="nav-toggle" className="collapsed" data-toggle="collapse" data-target="#page-sidebar"><span /></button>
-        </div>
-
         <div id="page-content-wrapper">
           <div id="page-content">
 
             <div id="page-title" style={{marginBottom:"10px"}}>
-                <h2>範例Login</h2>
+                <h2>Login</h2>
             </div>
             {this.props.children}
-
-            <Button color="primary">primary</Button>{' '}
-
           </div>
         </div>
       </div>

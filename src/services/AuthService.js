@@ -4,6 +4,59 @@ import Decrypt from './decrypt';
 import * as COMMON from '../common/common';
 
 var AuthFetchService = {
+  async login(mid,userid,passwd,callback){
+    !__RELEASE__ && console.log("service:login",userid,passwd);
+    if (userid === null || userid == ""){
+    }else{
+      try {
+        !__RELEASE__ && console.log("service:login",COMMON.FTH_BO_URL + '/Login');
+        let response = await fetch(COMMON.FTH_BO_URL + '/Login', {
+          method: 'POST',
+          headers: COMMON.FETCH_HEADERS(''),
+          body:COMMON.toQueryString({
+            'UserID':userid,
+            'UserPWD':passwd,
+            'MID':mid
+          })
+        });
+        let r = await response;
+        !__RELEASE__ && console.log("service:login",r);
+        if(r.ok){
+          r.json().then(function (data){
+            !__RELEASE__ && console.log("service:login ok",data);
+            callback(data);
+          });
+        } else {
+          r.json().then(function (data){
+            !__RELEASE__ && console.log("service:login fail：",data.message);
+          });
+        }
+      } catch(e) {
+        !__RELEASE__ && console.log("login, error", e);
+      }
+    }
+  },
+  async logout(uuid, token, callback){
+    try {
+      let response = await fetch(COMMON.FTH_URL + '/LogOut/'+uuid, {
+    		method: 'DELETE',
+    		headers: COMMON.FETCH_HEADERS(token || ''),
+    	});
+      let r = await response;
+      if(r.ok){
+  			callback(r);
+  		}else{
+  			callback(r);
+  		}
+    } catch(e) {
+      !__RELEASE__ && console.log("logout, error", e);
+    }
+  },
+
+
+
+
+
   async getBy(token,uuid,time,callback2){
     if (token === null || token == ""){
     }else{

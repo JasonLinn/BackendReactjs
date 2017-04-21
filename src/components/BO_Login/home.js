@@ -9,6 +9,9 @@ export default class BOLoginHome extends Component {
     render() {
         return (
           <div className="row">
+            <div className="col-md-3">
+              邊攔
+            </div>
             <div className="col-md-9">
               <div className="panel">
                 <div className="panel-body" style={{padding:"0"}}>
