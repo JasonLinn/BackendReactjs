@@ -17,7 +17,7 @@ import { IntlProvider } from 'react-intl';
 import intl from 'intl';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 // import initTranslation from './components/Common/localize';
 // initTranslation();
 import injectTapEventPlugin from 'react-tap-event-plugin';

@@ -25,7 +25,7 @@ export var ROOT_PATH = ROOT_PATH1;
 export function FETCH_HEADERS(t) {
     return{
       'Accept':'application/json',
-      'Application_Key':'93544952',
+      'Application_Key':93544952,
       'Authorization': t,
       'lang':'zh',
       'timezone':'Asia/Taipei',
@@ -40,7 +40,7 @@ export function FETCH_HEADERS(t) {
 export function FETCH_GET_HEADERS(t) {
     return{
       'Accept':'application/json',
-      'Application_Key':'93544952',
+      'Application_Key':93544952,
       'Authorization': t,
       'lang':'zh',
       'timezone':'Asia/Taipei',

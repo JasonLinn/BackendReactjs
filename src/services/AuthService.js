@@ -13,7 +13,7 @@ var AuthFetchService = {
         let response = await fetch(COMMON.FTH_BO_URL + '/Login', {
           method: 'POST',
           headers: COMMON.FETCH_HEADERS(''),
-          body:COMMON.toQueryString({
+          body:JSON.stringify({
             'UserID':userid,
             'UserPWD':passwd,
             'MID':mid
@@ -29,16 +29,18 @@ var AuthFetchService = {
         } else {
           r.json().then(function (data){
             !__RELEASE__ && console.log("service:login fail：",data.message);
+            callback(false);
           });
         }
       } catch(e) {
         !__RELEASE__ && console.log("login, error", e);
+        callback(false);
       }
     }
   },
   async logout(uuid, token, callback){
     try {
-      let response = await fetch(COMMON.FTH_URL + '/LogOut/'+uuid, {
+      let response = await fetch(COMMON.FTH_BO_URL + '/LogOut/'+uuid, {
     		method: 'DELETE',
     		headers: COMMON.FETCH_HEADERS(token || ''),
     	});
@@ -61,7 +63,7 @@ var AuthFetchService = {
     if (token === null || token == ""){
     }else{
       try {
-        let response = await fetch(COMMON.FTH_URL + '/eat_note?uuid='+ uuid + '&time=' + Math.round(Date.parse(time)/1000), {
+        let response = await fetch(COMMON.FTH_BO_URL + '/eat_note?uuid='+ uuid + '&time=' + Math.round(Date.parse(time)/1000), {
           method: 'GET',
           headers: COMMON.FETCH_GET_HEADERS(token)
         });
@@ -81,7 +83,7 @@ var AuthFetchService = {
     if (token === null || token == ""){
     }else{
       try {
-        let response = await fetch(COMMON.FTH_URL + '/eat_note', {
+        let response = await fetch(COMMON.FTH_BO_URL + '/eat_note', {
           method: 'PUT',
           headers: COMMON.FETCH_HEADERS(token),
           body:COMMON.toQueryString(bodyData)
@@ -107,7 +109,7 @@ var AuthFetchService = {
     if (token === null || token == ""){
     }else{
       try {
-        let response = await fetch(COMMON.FTH_URL + '/eatfit', {
+        let response = await fetch(COMMON.FTH_BO_URL + '/eatfit', {
           method: 'DELETE',
           headers: COMMON.FETCH_HEADERS(token),
           body:COMMON.toQueryString(bodyData)

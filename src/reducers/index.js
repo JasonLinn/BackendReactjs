@@ -4,8 +4,8 @@ import { routerReducer } from 'react-router-redux';
 import view from './view';
 import date from './date';
 import login from './login';
-import sample from './sample';
-
+import userMenu from './bo-menu';
+import fetching from './fetching';
 import * as storage from 'redux-storage';
 
 const rootReducer = combineReducers({
@@ -13,7 +13,8 @@ const rootReducer = combineReducers({
   routing:routerReducer,
   viewStore:view,
   dateStore:date,
-  sampleStore:sample
+  userMenuStore:userMenu,
+  fetchingStore:fetching
 });
 
 const reducer = storage.reducer(rootReducer);

@@ -37,17 +37,37 @@ class HomeContent extends Component {
     let x = Decrypt.decryptBOUserData();
   }
 
-  // note變化時啟動
+  // 登入事件
   handleLogin(e){
+    e.preventDefault();
 
-    this.props.loginUser(11,'hunk.kuo','zxc123');
+    var username = this.refs.username.value.trim();
+    var password = this.refs.password.value.trim();
 
+    if(username == '' || password == ''){
+      alert('no input');
+      return;
+    }
+
+    this.props.loginUser(11,username,password);
   }
 
   render() {
     return (
-      <div>
-        <Button color="primary" onClick={this.handleLogin.bind(this)}>登入</Button>{' '}
+      <div className="auth-content">
+        <form id="login-form">
+          <div className="form-group">
+            <label htmlFor="username">帳號</label>
+            <input type="text" className="form-control underlined" name="username" id="username" ref="username" placeholder="Your account" required value="hunk.kuo"/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">密碼</label>
+            <input type="password" className="form-control underlined" name="password" id="password" ref="password" placeholder="Your password" required value="zxc123"/>
+          </div>
+          <div className="form-group">
+            <Button color="primary" className="btn btn-block btn-primary" onClick={this.handleLogin.bind(this)}>登入</Button>
+          </div>
+        </form>
       </div>
     );
   }

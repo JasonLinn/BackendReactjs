@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import SampleHome from './home';
+import BOHome from './home';
 import Decrypt from '../../services/decrypt';
 import {connect} from 'react-redux';
 import * as COMMON from '../../common/common';
 import { browserHistory } from 'react-router';
 import { Button } from 'reactstrap';
+import MenuSidebar from '../Attachment/menu_sidebar';
 
 function mapStateToProps(state){
     return{
@@ -12,7 +13,7 @@ function mapStateToProps(state){
     }
 };
 
-class SampleIndex extends Component {
+class BOAccountIndex extends Component {
 
   componentWillMount(e){
     // //檢驗登入權限
@@ -26,27 +27,13 @@ class SampleIndex extends Component {
 
   render() {
     return (
-      <div id="page-wrapper">
-
-        <div id="mobile-navigation">
-          <button id="nav-toggle" className="collapsed" data-toggle="collapse" data-target="#page-sidebar"><span /></button>
-        </div>
-
-        <div id="page-content-wrapper">
-          <div id="page-content">
-
-            <div id="page-title" style={{marginBottom:"10px"}}>
-                <h2>範例2</h2>
-            </div>
-            {this.props.children}
-
-            <Button color="primary">primary</Button>{' '}
-
-          </div>
-        </div>
+      <div id="wrapper">
+        {/* Navigation */}
+        <MenuSidebar />
+        {this.props.children}
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps)(SampleIndex);
+export default connect(mapStateToProps)(BOAccountIndex);
