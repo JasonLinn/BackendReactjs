@@ -48,6 +48,7 @@ export function logout(uuid,token,endTo = COMMON.ROOT_PATH+'/loginbo.html'){
           browserHistory.push(endTo);
 				}
 			}else{
+        !__RELEASE__ && console.log("logout err",result);
         return;
       }
 		});

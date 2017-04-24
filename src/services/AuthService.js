@@ -40,8 +40,8 @@ var AuthFetchService = {
   },
   async logout(uuid, token, callback){
     try {
-      let response = await fetch(COMMON.FTH_BO_URL + '/LogOut/'+uuid, {
-    		method: 'DELETE',
+      let response = await fetch(COMMON.FTH_BO_URL + '/LogOut?id='+uuid, {
+    		method: 'POST',
     		headers: COMMON.FETCH_HEADERS(token || ''),
     	});
       let r = await response;
