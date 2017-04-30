@@ -6,25 +6,24 @@ export default class BOLoginHome extends Component {
     super(props);
     $(window).scrollTop(0);
   }
-    render() {
-        return (
-          <div className="row">
-            <div className="col-md-3">
-              邊攔
-            </div>
-            <div className="col-md-9">
-              <div className="panel">
-                <div className="panel-body" style={{padding:"0"}}>
-                  <div className="example-box-wrapper">
-                    <HomeContent dateStr = {this.props.params.dateStr || ""} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              邊攔123
-            </div>
-          </div>
-        );
-    }
+  render() {
+    return (
+      <div className="auth-container">
+        <div className="card">
+          <header className="auth-header">
+            <h1 className="auth-title">
+                <div className="logo">
+                  <span className="l l1"></span>
+                  <span className="l l2"></span>
+                  <span className="l l3"></span>
+                  <span className="l l4"></span>
+                  <span className="l l5"></span>
+                </div> 後台管理
+            </h1>
+          </header>
+          <HomeContent />
+        </div>
+      </div>
+    );
+  }
 }

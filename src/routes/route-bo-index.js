@@ -6,8 +6,8 @@ import NotFound from '../components/NotFound'
 
 import BOIndexPrepare from '../components/BOIndexPrepare';
 
-import SampleIndex from '../components/sample/index'
-import SampleHome from '../components/sample/home';
+import BOAccountIndex from '../components/BO_Account/index'
+import BOAccountHome from '../components/BO_Account/home';
 
 import * as COMMON from '../common/common';
 
@@ -20,10 +20,9 @@ export default(
     <Redirect from={COMMON.ROOT_PATH+"/indexbo.html"} to={COMMON.ROOT_PATH+"/prepare"} />
     <Route path={COMMON.ROOT_PATH+"/prepare"} component={BOIndexPrepare}/>
 
-    <Route path={COMMON.ROOT_PATH+"/st"} component={SampleIndex} >
-      <IndexRoute component={SampleHome} />
-      <Route path="home(/:dateStr)" component={SampleHome} />
-      <Route path="test" component={SampleHome} />
+    <Route path={COMMON.ROOT_PATH+"/account"} component={BOAccountIndex} >
+      <IndexRoute component={BOAccountHome} />
+      <Route path="home(/:dateStr)" component={BOAccountHome} />
     </Route>
 
     <Route path={COMMON.ROOT_PATH+"*"} component={NotFound} />

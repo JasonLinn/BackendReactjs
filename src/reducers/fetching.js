@@ -1,17 +1,15 @@
 
 const initialState ={
-  date: new Date().toISOString(),
-  note:'',
   isFetching: false,
 }
 
-function sample (state=initialState, action){
+function fetching (state=initialState, action){
 	switch (action.type){
-		case "SAMPLE_SEND_REQUEST":{
+		case "SEND_REQUEST":{
       return {...state, isFetching: true}
       break;
     }
-    case "SAMPLE_RECEIVE_RESPONSE":{
+    case "RECEIVE_RESPONSE":{
 			return {...state, isFetching: false}
   		break;
     }
@@ -19,4 +17,4 @@ function sample (state=initialState, action){
 	return state;
 }
 
-export default sample;
+export default fetching;

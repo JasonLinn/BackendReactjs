@@ -116,7 +116,7 @@ module.exports = {
       // 类库统一打包生成一个文件
       new webpack.optimize.CommonsChunkPlugin({
           name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
-          chunks: ['indexbo','sample','loginbo'], //提取哪些模块共有的部分
+          chunks: ['indexbo','loginbo','accountbo'], //提取哪些模块共有的部分
           // filename: isProduction ? 'js/vendor.[hash:10].js':'js/vendor.js',
           minChunks: 3 // 提取至少4个模块共有的部分
       }),
@@ -138,29 +138,29 @@ module.exports = {
       }),
       new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> Track
         path:loPath,
-        indexJs:'loginbo.js',
-        title:'登入',
+        indexJs:'accountbo.js',
+        title:'帳號管理',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-        filename: '../loginbo.html', //生成的html存放路径，相对于path
+        filename: '../accountbo.html', //生成的html存放路径，相对于path
         template: './src/templates/index.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
         // hash: true, //为静态资源生成hash值 ， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'loginbo'],//需要引入的chunk，不配置就会引入所有页面的资源
+        chunks: ['vendors', 'accountbo'],//需要引入的chunk，不配置就会引入所有页面的资源
         minify: { //压缩HTML文件
             removeComments: isProduction ? true : false, //移除HTML中的注释
             collapseWhitespace: false //删除空白符与换行符
         }
       }),
-      new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> FiTobex
+      new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML ==> Track
         path:loPath,
-        indexJs:'sample.js',
-        title:'範例',
+        indexJs:'loginbo.js',
+        title:'登入',
         // favicon: './src/img/favicon.ico', //favicon路径，通过webpack引入同时可以生成hash值
-        filename: '../sample.html', //生成的html存放路径，相对于path
-        template: './src/templates/index.template.html', //html模板路径
+        filename: '../loginbo.html', //生成的html存放路径，相对于path
+        template: './src/templates/login.template.html', //html模板路径
         inject: 'body', //js插入的位置，true/'head'/'body'/false
-        // hash: true, //为静态资源生成hash值， 設定成 true 會無法正確 hot loader
-        chunks: ['vendors', 'sample'],//需要引入的chunk，不配置就会引入所有页面的资源
+        // hash: true, //为静态资源生成hash值 ， 設定成 true 會無法正確 hot loader
+        chunks: ['vendors', 'loginbo'],//需要引入的chunk，不配置就会引入所有页面的资源
         minify: { //压缩HTML文件
             removeComments: isProduction ? true : false, //移除HTML中的注释
             collapseWhitespace: false //删除空白符与换行符
@@ -177,8 +177,8 @@ if(isProduction || isTest){
 
   module.exports.entry = { //prod 使用：配置入口文件，有几个写几个
       indexbo: './src/page/index-bo.js',
+      accountbo: './src/page/index-bo-account.js',
       loginbo: './src/page/login-bo.js',
-      sample: './src/page/index-bo.js',
   };
 
   module.exports.plugins.push(
@@ -217,17 +217,17 @@ if(isProduction || isTest){
           'webpack/hot/only-dev-server',
           './src/page/index-bo.js'
       ],
+      accountbo: [
+          // 'babel-polyfill',
+          'webpack-dev-server/client?http://0.0.0.0:3001',
+          'webpack/hot/only-dev-server',
+          './src/page/index-bo-account.js'
+      ],
       loginbo: [
           // 'babel-polyfill',
           'webpack-dev-server/client?http://0.0.0.0:3001',
           'webpack/hot/only-dev-server',
           './src/page/login-bo.js'
-      ],
-      sample: [
-          // 'babel-polyfill',
-          'webpack-dev-server/client?http://0.0.0.0:3001',
-          'webpack/hot/only-dev-server',
-          './src/page/index-bo.js'
       ],
   };
 

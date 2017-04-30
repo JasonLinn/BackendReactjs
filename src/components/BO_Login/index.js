@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SampleHome from './home';
+import BOHome from './home';
 import Decrypt from '../../services/decrypt';
 import {connect} from 'react-redux';
 import * as COMMON from '../../common/common';
@@ -25,16 +25,8 @@ class BOLoginIndex extends Component {
 
   render() {
     return (
-      <div id="page-wrapper">
-        <div id="page-content-wrapper">
-          <div id="page-content">
-
-            <div id="page-title" style={{marginBottom:"10px"}}>
-                <h2>Login</h2>
-            </div>
-            {this.props.children}
-          </div>
-        </div>
+      <div className="auth">
+        {this.props.children}
       </div>
     );
   }

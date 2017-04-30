@@ -25,7 +25,7 @@ class BOLoginPrepare extends Component {
     COMMON.wait(1000)
     .then(function(){
       !__RELEASE__ && console.log("tp",2);
-      window.location = COMMON.ROOT_PATH+'/indexbo.html';
+      window.location = COMMON.ROOT_PATH+'/accountbo.html';
     });
   }
 
