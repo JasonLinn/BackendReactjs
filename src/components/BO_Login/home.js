@@ -22,7 +22,7 @@ export default class BOLoginHome extends Component {
               </div>
             </div>
             <div className="col-md-3">
-              邊攔
+              邊攔123
             </div>
           </div>
         );
